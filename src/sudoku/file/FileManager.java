@@ -42,11 +42,11 @@ public class FileManager {
                 int value = jsonString.split(",")[2].charAt(11);
                 //get the integer value from the ascii character
                 value -= 48;
-                System.out.print(value + " ");
+                //System.out.print(value + " ");
                 grid[row][column] = value;
             }
             else{
-                System.out.print(0 + " ");
+                //System.out.print(0 + " ");
                 grid[row][column] = 0;
             }
             
@@ -54,14 +54,8 @@ public class FileManager {
             if(++column == 9){
                 column = 0;
                 row++;
-                System.out.println();
+                //System.out.println();
             }
         } 
-    }
-    
-    
-    public static void main(String[] args) throws IOException, ParseException{
-        FileManager fileManager = new FileManager();
-        fileManager.parseGridFile(new int[9][9], "easy/1.json");
     }
 }

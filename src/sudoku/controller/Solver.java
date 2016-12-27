@@ -5,6 +5,10 @@
  */
 package sudoku.controller;
 
+import java.io.IOException;
+import org.json.simple.parser.ParseException;
+import sudoku.file.FileManager;
+
 
 /**
  *
@@ -143,18 +147,15 @@ public class Solver {
         }
     }
     
-//    public static void main(String[] args){
-//        int[][] grid = {{3, 0, 6, 5, 0, 8, 4, 0, 0},
-//                      {5, 2, 0, 0, 0, 0, 0, 0, 0},
-//                      {0, 8, 7, 0, 0, 0, 0, 3, 1},
-//                      {0, 0, 3, 0, 1, 0, 0, 8, 0},
-//                      {9, 0, 0, 8, 6, 3, 0, 0, 5},
-//                      {0, 5, 0, 0, 9, 0, 6, 0, 0},
-//                      {1, 3, 0, 0, 0, 0, 2, 5, 0},
-//                      {0, 0, 0, 0, 0, 0, 0, 7, 4},
-//                      {0, 0, 5, 2, 0, 6, 3, 0, 0}};
-//        Solver Solver = new Solver();
-//        Solver.solveSudoku(grid);
-//        printGrid(grid);
-//    }
+    public static void main(String[] args) throws IOException, ParseException{
+        FileManager fileManager = new FileManager();
+        
+        int[][] grid = new int[N][N];
+        fileManager.parseGridFile(grid, "hard/1.json");
+        
+        
+        Solver Solver = new Solver();
+        Solver.solveSudoku(grid);
+        printGrid(grid);
+    }
 }
