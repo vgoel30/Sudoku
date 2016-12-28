@@ -81,8 +81,6 @@ public class SudokuBoard {
     public void makeRow(int rowNumber){
         String cssString;
         
-        
-        
         int i;
         //make all the 9 cells in a row
         for(i = 0; i < 9; i++){
@@ -95,26 +93,39 @@ public class SudokuBoard {
             cell.setMinSize(60, 60);
             cell.setMaxSize(60, 60);
             
-            if((rowNumber + 1) % 3 == 0 && (i + 1) % 3 == 0){
-                cssString = "-fx-border-color: black;\n"
-                + "-fx-border-width: 2 4 4 2;\n" + "-fx-border-style: solid;\n";
-            }
-            else if((rowNumber + 1) % 3 == 0){
-               cssString = "-fx-border-color: black;\n"
-                + "-fx-border-width: 2 2 4 2;\n" + "-fx-border-style: solid;\n"; 
-            }
-            else if((i + 1) % 3 == 0){
-               cssString = "-fx-border-color: black;\n"
-                + "-fx-border-width: 2 4 2 2;\n" + "-fx-border-style: solid;\n"; 
-            }
-            else if(rowNumber == 0){
-                cssString = "-fx-border-color: black;\n"
-                + "-fx-border-width: 2 2 2 2;\n" + "-fx-border-style: solid;\n";
+            if(rowNumber == 0){
+               if((i + 1) % 3 == 0){
+                   cssString = "-fx-border-color: black;\n"
+                + "-fx-border-width: 2 4 2 2;\n" + "-fx-border-style: solid;\n";
+               }
+               else{
+                 cssString = "-fx-border-color: black;\n"
+                + "-fx-border-width: 2 2 2 2;\n" + "-fx-border-style: solid;\n";  
+               }
             }
             else{
-                cssString = "-fx-border-color: black;\n"
+                if((rowNumber + 1) % 3 == 0 && (i + 1) % 3 == 0){
+                    cssString = "-fx-border-color: black;\n"
+                + "-fx-border-width: 0 4 4 2;\n" + "-fx-border-style: solid;\n";
+                }
+                
+                else if((rowNumber + 1) % 3 == 0){
+                    cssString = "-fx-border-color: black;\n"
+                + "-fx-border-width: 0 2 4 2;\n" + "-fx-border-style: solid;\n";
+                }
+     
+                else if((i + 1) % 3 == 0){
+                    cssString = "-fx-border-color: black;\n"
+                + "-fx-border-width: 0 4 2 2;\n" + "-fx-border-style: solid;\n";
+                }
+                
+                else{
+                    cssString = "-fx-border-color: black;\n"
                 + "-fx-border-width: 0 2 2 2;\n" + "-fx-border-style: solid;\n";
+                }
             }
+            
+            
             cell.setStyle(cssString);
         }
     }
