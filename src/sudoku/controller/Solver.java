@@ -147,15 +147,15 @@ public class Solver {
         }
     }
     
-    public static void main(String[] args) throws IOException, ParseException{
-        FileManager fileManager = new FileManager();
-        
-        int[][] grid = new int[N][N];
-        fileManager.parseGridFile(grid, "hard/1.json");
-        
-        
-        Solver Solver = new Solver();
-        Solver.solveSudoku(grid);
-        printGrid(grid);
-    }
+//    public static void main(String[] args) throws IOException, ParseException{
+//        FileManager fileManager = new FileManager();
+//        
+//        int[][] grid = new int[N][N];
+//        fileManager.parseGridFile(grid, "hard/1.json");
+//        
+//        
+//        Solver Solver = new Solver();
+//        Solver.solveSudoku(grid);
+//        printGrid(grid);
+//    }
 }

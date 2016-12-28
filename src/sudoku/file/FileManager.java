@@ -32,7 +32,7 @@ public class FileManager {
         int column = 0;
         int row = 0;
         
-        //Go thorugh all the cells in the json file
+        //Go thorugh all the cell 'objects' in the json file
         for(Object jsonObject: jsonArray){
             String jsonString = (String)jsonObject;
             
@@ -42,11 +42,10 @@ public class FileManager {
                 int value = jsonString.split(",")[2].charAt(11);
                 //get the integer value from the ascii character
                 value -= 48;
-                //System.out.print(value + " ");
+                //Assign the value to that cell
                 grid[row][column] = value;
             }
             else{
-                //System.out.print(0 + " ");
                 grid[row][column] = 0;
             }
             
@@ -54,7 +53,6 @@ public class FileManager {
             if(++column == 9){
                 column = 0;
                 row++;
-                //System.out.println();
             }
         } 
     }
