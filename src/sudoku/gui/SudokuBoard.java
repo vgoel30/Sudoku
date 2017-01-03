@@ -8,11 +8,14 @@ package sudoku.gui;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.geometry.Insets;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import sudoku.controller.ViewController;
 
 /**
@@ -23,7 +26,13 @@ public class SudokuBoard {
     ViewController viewController;
     
     VBox mainScene;
-    VBox boardContainer; 
+    VBox boardContainer;
+    
+    HBox levelSwitchesRow;
+    Button easyButton;
+    Button mediumButton;
+    Button hardButton;
+    Button solveButton;
     
     //All the rows of the grid
     HBox firstRow;
@@ -38,12 +47,25 @@ public class SudokuBoard {
     
     ArrayList<HBox> rows;
     ArrayList<Pane> cells;
+    ArrayList<TextArea> textAreas;
     
     public void layoutGUI(){
         viewController = new ViewController();
         
-        mainScene = new VBox();
+        mainScene = new VBox(30);
         boardContainer = new VBox();
+        
+        levelSwitchesRow = new HBox(30);
+        
+        easyButton = new Button("Easy");
+        mediumButton = new Button("Medium");
+        hardButton = new Button("Hard");
+        solveButton = new Button("Solve");
+        
+        levelSwitchesRow.getChildren().add(easyButton);
+        levelSwitchesRow.getChildren().add(mediumButton);
+        levelSwitchesRow.getChildren().add(hardButton);
+        levelSwitchesRow.getChildren().add(solveButton);
         
         firstRow = new HBox();
         secondRow = new HBox();
@@ -64,18 +86,23 @@ public class SudokuBoard {
         }
         
         cells = new ArrayList<>();
+        textAreas = new ArrayList<>();
         
         //set up all the rows of the grid
         for(int i = 0; i < 9; i++)
             makeRow(i);
         
-        for (HBox row : rows) {
+        for (HBox row : rows){
             row.setMinSize(540, 60);
             row.setMaxSize(540, 60);
         }
         
         mainScene.getChildren().add(boardContainer);
+        mainScene.getChildren().add(levelSwitchesRow);
         mainScene.setPadding(new Insets(80,20,20,100));
+        
+        viewController.attachEventHandlers(cells);
+        viewController.attachTextEventHandlers(textAreas);
     }
     
     public void makeRow(int rowNumber){
@@ -85,13 +112,22 @@ public class SudokuBoard {
         //make all the 9 cells in a row
         for(i = 0; i < 9; i++){
             
-            AnchorPane cell = new AnchorPane();
+            StackPane cell = new StackPane();
             rows.get(rowNumber).getChildren().add(cell);
             //set the id of this cell (row+col)
             cell.setId(rowNumber + "" + i);
             cells.add(cell);
             cell.setMinSize(60, 60);
             cell.setMaxSize(60, 60);
+            //Add the text area for the cell
+            TextArea text = new TextArea();
+            textAreas.add(text);
+            text.setMinSize(59, 59);
+            text.setMaxSize(59, 59);
+            text.setFont(Font.font("Helvetica", FontWeight.BOLD, 28));
+            text.setText("9");
+            //text.setDisable(true);
+            cell.getChildren().add(text);
             
             if(rowNumber == 0){
                if((i + 1) % 3 == 0){
@@ -124,8 +160,6 @@ public class SudokuBoard {
                 + "-fx-border-width: 0 2 2 2;\n" + "-fx-border-style: solid;\n";
                 }
             }
-            
-            
             cell.setStyle(cssString);
         }
     }
@@ -241,6 +275,55 @@ public class SudokuBoard {
     public void setCells(ArrayList<Pane> cells) {
         this.cells = cells;
     }
+
+    public HBox getLevelSwitchesRow() {
+        return levelSwitchesRow;
+    }
+
+    public void setLevelSwitchesRow(HBox levelSwitchesRow) {
+        this.levelSwitchesRow = levelSwitchesRow;
+    }
+
+    public Button getEasyButton() {
+        return easyButton;
+    }
+
+    public void setEasyButton(Button easyButton) {
+        this.easyButton = easyButton;
+    }
+
+    public Button getMediumButton() {
+        return mediumButton;
+    }
+
+    public void setMediumButton(Button mediumButton) {
+        this.mediumButton = mediumButton;
+    }
+
+    public Button getHardButton() {
+        return hardButton;
+    }
+
+    public void setHardButton(Button hardButton) {
+        this.hardButton = hardButton;
+    }
+
+    public Button getSolveButton() {
+        return solveButton;
+    }
+
+    public void setSolveButton(Button solveButton) {
+        this.solveButton = solveButton;
+    }
+
+    public ArrayList<TextArea> getTextAreas() {
+        return textAreas;
+    }
+
+    public void setTextAreas(ArrayList<TextArea> textAreas) {
+        this.textAreas = textAreas;
+    }
+    
     
     
 }

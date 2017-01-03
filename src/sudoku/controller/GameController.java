@@ -15,6 +15,7 @@ import sudoku.gui.SudokuBoard;
  * @author varungoel
  */
 public class GameController extends Application{
+    static final int SIZE = 750;
     
     static SudokuBoard sudokuBoard;
     static int[][] board;
@@ -28,13 +29,13 @@ public class GameController extends Application{
     public void start(Stage primaryStage) throws Exception {
         getBoardReady();
 
-        Scene scene = new Scene(sudokuBoard.getMainScene(), 700, 700);
+        Scene scene = new Scene(sudokuBoard.getMainScene(), SIZE, SIZE);
         primaryStage.setScene(scene);
-        //fixed dimensions for the board (650 * 650)
-        primaryStage.setMaxHeight(700);
-        primaryStage.setMaxWidth(700);
-        primaryStage.setMinHeight(700);
-        primaryStage.setMinWidth(700);
+        //fixed dimensions for the board 
+        primaryStage.setMaxHeight(SIZE);
+        primaryStage.setMaxWidth(SIZE);
+        primaryStage.setMinHeight(SIZE);
+        primaryStage.setMinWidth(SIZE);
 
         primaryStage.show();
     }
