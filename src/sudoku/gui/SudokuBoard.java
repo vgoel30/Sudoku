@@ -5,8 +5,11 @@
  */
 package sudoku.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -16,6 +19,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.json.simple.parser.ParseException;
+import sudoku.controller.GameController;
 import sudoku.controller.ViewController;
 
 /**
@@ -124,9 +129,9 @@ public class SudokuBoard {
             textAreas.add(text);
             text.setMinSize(59, 59);
             text.setMaxSize(59, 59);
-            text.setFont(Font.font("Helvetica", FontWeight.BOLD, 28));
-            text.setText("9");
-            //text.setDisable(true);
+            text.setFont(Font.font("Helvetica", FontWeight.BLACK, 28));
+            text.setText("0");
+            text.setDisable(true);
             cell.getChildren().add(text);
             
             if(rowNumber == 0){
@@ -184,146 +189,100 @@ public class SudokuBoard {
         return boardContainer;
     }
 
-    public void setBoardContainer(VBox boardContainer) {
-        this.boardContainer = boardContainer;
-    }
 
     public HBox getFirstRow() {
         return firstRow;
-    }
-
-    public void setFirstRow(HBox firstRow) {
-        this.firstRow = firstRow;
     }
 
     public HBox getSecondRow() {
         return secondRow;
     }
 
-    public void setSecondRow(HBox secondRow) {
-        this.secondRow = secondRow;
-    }
 
     public HBox getThirdRow() {
         return thirdRow;
     }
 
-    public void setThirdRow(HBox thirdRow) {
-        this.thirdRow = thirdRow;
-    }
+
 
     public HBox getFourthRow() {
         return fourthRow;
     }
 
-    public void setFourthRow(HBox fourthRow) {
-        this.fourthRow = fourthRow;
-    }
+
 
     public HBox getFifthRow() {
         return fifthRow;
     }
 
-    public void setFifthRow(HBox fifthRow) {
-        this.fifthRow = fifthRow;
-    }
-
+ 
     public HBox getSixthRow() {
         return sixthRow;
     }
 
-    public void setSixthRow(HBox sixthRow) {
-        this.sixthRow = sixthRow;
-    }
 
     public HBox getSeventhRow() {
         return seventhRow;
     }
 
-    public void setSeventhRow(HBox seventhRow) {
-        this.seventhRow = seventhRow;
-    }
+
 
     public HBox getEighthRow() {
         return eighthRow;
     }
 
-    public void setEighthRow(HBox eighthRow) {
-        this.eighthRow = eighthRow;
-    }
+
 
     public HBox getNinthRow() {
         return ninthRow;
     }
 
-    public void setNinthRow(HBox ninthRow) {
-        this.ninthRow = ninthRow;
-    }
+  
 
     public ArrayList<HBox> getRows() {
         return rows;
     }
 
-    public void setRows(ArrayList<HBox> rows) {
-        this.rows = rows;
-    }
+
 
     public ArrayList<Pane> getCells() {
         return cells;
     }
 
-    public void setCells(ArrayList<Pane> cells) {
-        this.cells = cells;
-    }
+ 
 
     public HBox getLevelSwitchesRow() {
         return levelSwitchesRow;
     }
 
-    public void setLevelSwitchesRow(HBox levelSwitchesRow) {
-        this.levelSwitchesRow = levelSwitchesRow;
-    }
+  
 
     public Button getEasyButton() {
         return easyButton;
     }
 
-    public void setEasyButton(Button easyButton) {
-        this.easyButton = easyButton;
-    }
+    
 
     public Button getMediumButton() {
         return mediumButton;
     }
 
-    public void setMediumButton(Button mediumButton) {
-        this.mediumButton = mediumButton;
-    }
+    
 
     public Button getHardButton() {
         return hardButton;
     }
 
-    public void setHardButton(Button hardButton) {
-        this.hardButton = hardButton;
-    }
-
+    
     public Button getSolveButton() {
         return solveButton;
     }
 
-    public void setSolveButton(Button solveButton) {
-        this.solveButton = solveButton;
-    }
-
+  
     public ArrayList<TextArea> getTextAreas() {
         return textAreas;
     }
 
-    public void setTextAreas(ArrayList<TextArea> textAreas) {
-        this.textAreas = textAreas;
-    }
     
-    
-    
+        
 }

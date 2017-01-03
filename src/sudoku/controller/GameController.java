@@ -5,9 +5,11 @@
  */
 package sudoku.controller;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.json.simple.parser.ParseException;
 import sudoku.gui.SudokuBoard;
 
 /**
@@ -18,7 +20,8 @@ public class GameController extends Application{
     static final int SIZE = 750;
     
     static SudokuBoard sudokuBoard;
-    static int[][] board;
+    //the board's current state
+    static int[][] userBoard;
     static ViewController viewController;
     
     public static void main(String[] args) {
@@ -28,6 +31,17 @@ public class GameController extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         getBoardReady();
+        
+        //when the easy button is clicked
+        sudokuBoard.getEasyButton().setOnAction(e -> {
+            try {
+                viewController.newEasyGrid(GameController.userBoard, sudokuBoard.getTextAreas());
+            } catch (IOException ex) {
+                System.out.println("Invalid easy file");
+            } catch (ParseException ex) {
+                System.out.println("Invalid format in easy file");
+            }
+        });
 
         Scene scene = new Scene(sudokuBoard.getMainScene(), SIZE, SIZE);
         primaryStage.setScene(scene);
@@ -41,7 +55,7 @@ public class GameController extends Application{
     }
     
     public void getBoardReady(){
-        board = new int[9][9];
+        userBoard = new int[9][9];
         viewController = new ViewController();
         sudokuBoard = new SudokuBoard();
         sudokuBoard.layoutGUI();

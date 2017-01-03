@@ -5,10 +5,6 @@
  */
 package sudoku.controller;
 
-import java.io.IOException;
-import org.json.simple.parser.ParseException;
-import sudoku.file.FileManager;
-
 
 /**
  *
