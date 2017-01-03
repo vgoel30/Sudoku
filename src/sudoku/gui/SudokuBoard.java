@@ -5,11 +5,8 @@
  */
 package sudoku.gui;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -19,8 +16,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import org.json.simple.parser.ParseException;
-import sudoku.controller.GameController;
 import sudoku.controller.ViewController;
 
 /**
@@ -122,14 +117,14 @@ public class SudokuBoard {
             //set the id of this cell (row+col)
             cell.setId(rowNumber + "" + i);
             cells.add(cell);
-            cell.setMinSize(60, 60);
-            cell.setMaxSize(60, 60);
+            cell.setMinSize(59, 59);
+            cell.setMaxSize(59, 59);
             //Add the text area for the cell
             TextArea text = new TextArea();
             textAreas.add(text);
             text.setMinSize(59, 59);
             text.setMaxSize(59, 59);
-            text.setFont(Font.font("Helvetica", FontWeight.BLACK, 28));
+            text.setFont(Font.font("Tahoma", FontWeight.BLACK, 28));
             text.setText("0");
             text.setDisable(true);
             cell.getChildren().add(text);

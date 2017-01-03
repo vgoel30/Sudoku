@@ -22,6 +22,13 @@ public class ViewController {
     
     private static Random rand;
     private static FileManager fileManager;
+    private static Solver solver;
+    
+    public ViewController(){
+        fileManager = new FileManager();
+        solver = new Solver();
+        rand = new Random();
+    }
     
     public void attachEventHandlers(ArrayList<Pane> cells){
         for(Pane cell : cells){
@@ -34,12 +41,13 @@ public class ViewController {
     public void attachTextEventHandlers(ArrayList<TextArea> textAreas){
         for(TextArea textArea : textAreas){
             textArea.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+                System.out.println("Parent: " + textArea.getParent().getId());
                 // if the length is greater than 1, it's an invalid input
                 if(newValue.length() > 1)
                     textArea.setText(oldValue);
                 //make sure that the user is actually providing a +ve number greater than 0 as an input
                 if(newValue.length() > 0){
-                    if(!Character.isDigit(newValue.charAt(0)) || newValue.charAt(0) == '0'){
+                    if(!Character.isDigit(newValue.charAt(0)) || newValue.charAt(0) == 48){
                         textArea.setText("");
                     }
                 } 
@@ -49,10 +57,8 @@ public class ViewController {
     
     
     public void newEasyGrid(int[][] grid, ArrayList<TextArea> textAreas) throws IOException, ParseException{
-        rand = new Random();
         int puzzleIndex = rand.nextInt(5) + 1;
         String fileName = "easy/" + puzzleIndex + ".json";
-        fileManager = new FileManager();
         fileManager.parseGridFile(grid, fileName);
         
         int counter = 0;
@@ -62,12 +68,14 @@ public class ViewController {
                 if(grid[i][j] == 0){
                     textAreas.get(counter).setText("");
                     textAreas.get(counter).setDisable(false);
+                    
                 }
                 else{
                     textAreas.get(counter).setText(grid[i][j] + "");
                     textAreas.get(counter).setDisable(true);
+                    textAreas.get(counter).setStyle("-fx-background-color: black;");
                 }
-                System.out.print(grid[i][j] + " ");
+                //System.out.print(grid[i][j] + " ");
                 counter++;
             }
             System.out.println();
