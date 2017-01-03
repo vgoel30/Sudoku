@@ -32,14 +32,38 @@ public class GameController extends Application{
     public void start(Stage primaryStage) throws Exception {
         getBoardReady();
         
-        //when the easy button is clicked
+        //when the one of the level button is clicked
+        
+        //easy
         sudokuBoard.getEasyButton().setOnAction(e -> {
             try {
-                viewController.newEasyGrid(GameController.userBoard, sudokuBoard.getTextAreas());
+                viewController.newGrid(GameController.userBoard, sudokuBoard.getTextAreas(), 0);
             } catch (IOException ex) {
                 System.out.println("Invalid easy file");
             } catch (ParseException ex) {
                 System.out.println("Invalid format in easy file");
+            }
+        });
+        
+        //medium
+        sudokuBoard.getMediumButton().setOnAction(e -> {
+            try {
+                viewController.newGrid(GameController.userBoard, sudokuBoard.getTextAreas(), 1);
+            } catch (IOException ex) {
+                System.out.println("Invalid medium file");
+            } catch (ParseException ex) {
+                System.out.println("Invalid format in medium file");
+            }
+        });
+        
+        //hard
+        sudokuBoard.getHardButton().setOnAction(e -> {
+            try {
+                viewController.newGrid(GameController.userBoard, sudokuBoard.getTextAreas(), 2);
+            } catch (IOException ex) {
+                System.out.println("Invalid hard file");
+            } catch (ParseException ex) {
+                System.out.println("Invalid format in hard file");
             }
         });
 

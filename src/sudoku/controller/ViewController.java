@@ -50,15 +50,31 @@ public class ViewController {
                     if(!Character.isDigit(newValue.charAt(0)) || newValue.charAt(0) == 48){
                         textArea.setText("");
                     }
+                    else{
+                        String parentID = textArea.getParent().getId();
+                        //get the row and column of the cell
+                        int row = parentID.charAt(0) - 48;
+                        int column = parentID.charAt(1) - 48;
+                        int value = newValue.charAt(0) - 48;
+                        //for an illegal move, set the cell's text to a red color
+                        if(!solver.isLegal(GameController.userBoard, row, column, value)){
+                            textArea.setStyle("-fx-text-fill: red;");
+                        }
+                        else{
+                            textArea.setStyle("-fx-text-fill: black;");
+                        }
+                        GameController.userBoard[row][column] = value;
+                    }
                 } 
             });
         }
     }
     
     
-    public void newEasyGrid(int[][] grid, ArrayList<TextArea> textAreas) throws IOException, ParseException{
+    public void newGrid(int[][] grid, ArrayList<TextArea> textAreas, int levelIndex) throws IOException, ParseException{
+        String[] levels = {"easy/", "medium/", "hard/"};        
         int puzzleIndex = rand.nextInt(5) + 1;
-        String fileName = "easy/" + puzzleIndex + ".json";
+        String fileName = levels[levelIndex] + puzzleIndex + ".json";
         fileManager.parseGridFile(grid, fileName);
         
         int counter = 0;
