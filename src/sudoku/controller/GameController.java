@@ -22,6 +22,8 @@ public class GameController extends Application{
     static SudokuBoard sudokuBoard;
     //the board's current state
     static int[][] userBoard;
+    //the solution for the current board
+    static int[][] solutionBoard;
     static ViewController viewController;
     
     public static void main(String[] args) {
@@ -37,7 +39,7 @@ public class GameController extends Application{
         //easy
         sudokuBoard.getEasyButton().setOnAction(e -> {
             try {
-                viewController.newGrid(GameController.userBoard, sudokuBoard.getTextAreas(), 0);
+                viewController.newGrid(GameController.userBoard, GameController.solutionBoard, sudokuBoard.getTextAreas(), 0);
             } catch (IOException ex) {
                 System.out.println("Invalid easy file");
             } catch (ParseException ex) {
@@ -48,7 +50,7 @@ public class GameController extends Application{
         //medium
         sudokuBoard.getMediumButton().setOnAction(e -> {
             try {
-                viewController.newGrid(GameController.userBoard, sudokuBoard.getTextAreas(), 1);
+                viewController.newGrid(GameController.userBoard, GameController.solutionBoard, sudokuBoard.getTextAreas(), 1);
             } catch (IOException ex) {
                 System.out.println("Invalid medium file");
             } catch (ParseException ex) {
@@ -59,7 +61,7 @@ public class GameController extends Application{
         //hard
         sudokuBoard.getHardButton().setOnAction(e -> {
             try {
-                viewController.newGrid(GameController.userBoard, sudokuBoard.getTextAreas(), 2);
+                viewController.newGrid(GameController.userBoard, GameController.solutionBoard, sudokuBoard.getTextAreas(), 2);
             } catch (IOException ex) {
                 System.out.println("Invalid hard file");
             } catch (ParseException ex) {
@@ -80,6 +82,7 @@ public class GameController extends Application{
     
     public void getBoardReady(){
         userBoard = new int[9][9];
+        solutionBoard = new int[9][9];
         viewController = new ViewController();
         sudokuBoard = new SudokuBoard();
         sudokuBoard.layoutGUI();

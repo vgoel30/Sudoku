@@ -41,21 +41,27 @@ public class ViewController {
     public void attachTextEventHandlers(ArrayList<TextArea> textAreas){
         for(TextArea textArea : textAreas){
             textArea.textProperty().addListener((final ObservableValue<? extends String> observable, final String oldValue, final String newValue) -> {
+                String parentID = textArea.getParent().getId();
+                //get the row and column of the cell
+                int row = parentID.charAt(0) - 48;
+                int column = parentID.charAt(1) - 48;
+                
                 System.out.println("Parent: " + textArea.getParent().getId());
+                //if it's an empty cell
+                if(newValue.equals(""))
+                    GameController.userBoard[row][column] = 0;
+                
                 // if the length is greater than 1, it's an invalid input
                 if(newValue.length() > 1)
                     textArea.setText(oldValue);
                 //make sure that the user is actually providing a +ve number greater than 0 as an input
                 if(newValue.length() > 0){
+                    int value = newValue.charAt(0) - 48;
                     if(!Character.isDigit(newValue.charAt(0)) || newValue.charAt(0) == 48){
                         textArea.setText("");
+                        GameController.userBoard[row][column] = 0;
                     }
                     else{
-                        String parentID = textArea.getParent().getId();
-                        //get the row and column of the cell
-                        int row = parentID.charAt(0) - 48;
-                        int column = parentID.charAt(1) - 48;
-                        int value = newValue.charAt(0) - 48;
                         //for an illegal move, set the cell's text to a red color
                         if(!solver.isLegal(GameController.userBoard, row, column, value)){
                             textArea.setStyle("-fx-text-fill: red;");
@@ -71,7 +77,7 @@ public class ViewController {
     }
     
     
-    public void newGrid(int[][] grid, ArrayList<TextArea> textAreas, int levelIndex) throws IOException, ParseException{
+    public void newGrid(int[][] grid, int[][] solutionGrid, ArrayList<TextArea> textAreas, int levelIndex) throws IOException, ParseException{
         String[] levels = {"easy/", "medium/", "hard/"};        
         int puzzleIndex = rand.nextInt(5) + 1;
         String fileName = levels[levelIndex] + puzzleIndex + ".json";
@@ -81,6 +87,8 @@ public class ViewController {
         
         for(int i = 0; i < 9; i++){
             for(int j = 0; j < 9; j++){
+                //prepare the solution grid
+                solutionGrid[i][j] = grid[i][j];
                 if(grid[i][j] == 0){
                     textAreas.get(counter).setText("");
                     textAreas.get(counter).setDisable(false);
@@ -96,5 +104,7 @@ public class ViewController {
             }
             System.out.println();
         }
+        //get the solution grid filled
+        solver.solveSudoku(solutionGrid);
     }
 }
